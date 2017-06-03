@@ -1,0 +1,126 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+</head>
+<style>
+#containerbox    {
+    width:530px;
+    background: #000000;
+    height:130px;
+    margin:auto;
+    
+}
+#containerbutton {
+    width:530px;
+    background: #ffffff;
+    height:100px;
+    margin:auto;
+
+    
+}
+#containerscore {
+    width:150px;
+    background: #a0a0a0;
+    height:200px;
+    margin:auto;
+    text-align: center;
+    font-size: 50px;
+}
+button{
+	background-color: black;
+    border:none ;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 25px;
+    border-radius: 25px;
+}
+ .box{
+	display: inline-block;
+    float: left;
+    background: #ffffff;
+    width: 150px;
+    height: 100px;
+    margin: 10px;
+    text-align: center;
+    font-size: 50px;
+  } 
+
+</style>
+<body>
+<div id="containerbox">	
+ <div class="box" id="box1">0</div>
+ <div class="box" id="box2">0</div>
+ <div class="box" id="box3">0</div>
+</div><br><br><br>
+<div id="containerbutton">	
+    <button onclick ="spin()">SPIN</button>
+    <button onclick ="stop()">STOP</button>
+    <button onclick ="restart()">RESTART</button>
+</div>   
+   
+<div id="containerscore">
+	<p>Score</p>
+    <p id="score">10</p><br>
+ </div>   
+<script>
+var b1,b2,b3,grace_win=0,score_point=10;
+function spin(){
+	myVar = setInterval(spinning,250);
+}
+function restart(){
+	score_point=0;
+	document.getElementById("score").innerHTML=score_point;
+    document.getElementById("box1").innerHTML=0;
+     document.getElementById("box2").innerHTML=0;
+     document.getElementById("box3").innerHTML=0;
+
+}
+
+function spinning(){
+	
+     b1 = Math.floor((Math.random() * 9) + 1);
+     b2 = Math.floor((Math.random() * 9) + 1);
+     b3 = Math.floor((Math.random() * 9) + 1);
+     document.getElementById("box1").innerHTML=b1;
+     document.getElementById("box2").innerHTML=b2;
+     document.getElementById("box3").innerHTML=b3;
+   	  if(b1==9)
+       document.getElementById("box1").innerHTML='<img src="donald.jpg" alt="Smiley face" style="height: 100%; width: 100%;"></img>';
+
+      if(b2==9)
+       document.getElementById("box2").innerHTML='<img src="donald.jpg" alt="Smiley face" style="height: 100%; width: 100%;"></img>';
+       if(b3==9)
+       document.getElementById("box3").innerHTML='<img src="donald.jpg" alt="Smiley face" style="height: 100%; width: 100%;"></img>';        
+     
+}
+
+
+
+function stop(){
+	
+	grace_win++;
+	if(grace_win==5){
+     b2=b1;
+     b3=b1;		
+     document.getElementById("box1").innerHTML=b1;
+     document.getElementById("box2").innerHTML=b2;
+     document.getElementById("box3").innerHTML=b3;
+	 grace_win=0;	
+	}   
+	clearInterval(myVar);
+	if(b1==b2&&b3==b1){
+        score_point=score_point+10;
+        alert("Voila! you scored");
+     }   
+
+	else score_point--;
+	document.getElementById("score").innerHTML=score_point;
+
+    
+}
+</script>	
+</body>	
+</html>
